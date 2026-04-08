@@ -17,9 +17,25 @@
 import { readFileSync, writeFileSync, existsSync, statSync } from 'fs';
 import { resolve, dirname, join, relative } from 'path';
 import { fileURLToPath } from 'url';
+import { execSync } from 'child_process';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const BASE_HTML = resolve(__dirname, '../reference/base.html');
+
+// ─── Detect GitHub Pages base URL from git remote ───
+
+function detectGitHubPagesBase(cwd) {
+  try {
+    const remoteUrl = execSync('git remote get-url origin', { cwd, encoding: 'utf-8' }).trim();
+    // Match SSH: git@github.com:user/repo.git or HTTPS: https://github.com/user/repo.git
+    const match = remoteUrl.match(/github\.com[:/]([^/]+)\/([^/.]+?)(?:\.git)?$/);
+    if (match) {
+      const [, owner, repo] = match;
+      return `https://${owner}.github.io/${repo}`;
+    }
+  } catch { /* not a git repo or no remote */ }
+  return null;
+}
 
 // ─── Deep merge (arrays replaced, objects merged) ───
 
@@ -1093,14 +1109,27 @@ function build(courseDir) {
   let html = templateRaw;
   html = html.replace(/<!--[\s\S]*?-->\n?/g, '');
 
+  // Auto-detect GitHub Pages URL as fallback for SEO fields
+  const ghPagesBase = detectGitHubPagesBase(globalRoot);
+  const coursePath = relative(globalRoot, courseDir);
+  const autoUrl = ghPagesBase ? `${ghPagesBase}/${coursePath}/` : '';
+  const autoImage = ghPagesBase ? `${ghPagesBase}/${coursePath}/assets/og-image.jpg` : '';
+
   const og = {
     title: cfg.seo?.title || cfg.page?.title || '',
     description: cfg.seo?.description || cfg.page?.subtitle || '',
-    image: cfg.seo?.image || cfg.seo?.default_image || '',
-    url: cfg.seo?.url || '',
+    image: cfg.seo?.image || cfg.seo?.default_image || autoImage,
+    url: cfg.seo?.url || autoUrl,
     type: cfg.seo?.type || 'article',
     siteName: cfg.seo?.site_name || cfg.instructor?.name || '',
   };
+
+  if (!cfg.seo?.image && autoImage) {
+    console.log(`   SEO image (auto): ${autoImage}`);
+  }
+  if (!cfg.seo?.url && autoUrl) {
+    console.log(`   SEO url   (auto): ${autoUrl}`);
+  }
 
   const replacements = {
     '{{PAGE_LANG}}': cfg.page?.lang || 'zh-TW',
