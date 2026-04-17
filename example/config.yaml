@@ -1,0 +1,20 @@
+page:
+  title: "把講義變成網站｜用 Agent Skill 建立可維護的 AI 工作流"
+  badge: "Agent Skills · Codex · Vibe Coding"
+  hero_title: "把講義變成網站<br>用 Agent Skill 建立可維護的 AI 工作流"
+  subtitle: "從終端機安裝 Codex、生成第一版 HTML，到逆向拆成 Markdown 模板與 Agent Skill，示範如何把一次性的 AI 成果整理成能長期維護的工作流。"
+
+quotes:
+  opening:
+    text: "Vibe Coding 讓你很快看到成果，<br>但真正有價值的，<br>是你能不能把成果整理成日後還能持續使用的流程。"
+  closing:
+    text: >
+      AI 工具會一直變，介面也會一直換。<br>
+      真正能留下來的，是你怎麼設計模板、腳本與規則，<br>
+      讓每一次生成都不是一次性的煙火，而是可以反覆累積的能力。
+
+seo:
+  title: "把講義變成網站｜用 Agent Skill 建立可維護的 AI 工作流"
+  description: "從安裝 Codex、生成第一版網頁，到建立 Markdown 模板與 Agent Skill，學會把 Vibe Coding 的成果變成可維護、可重複使用的工作流。"
+  image: "https://ben-programmer.github.io/agent-skill-lecture-builder/example/assets/og-image.jpg"
+  url: "https://ben-programmer.github.io/agent-skill-lecture-builder/example/"

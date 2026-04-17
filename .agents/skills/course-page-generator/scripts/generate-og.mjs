@@ -42,9 +42,6 @@ function buildOgHtml(cfg) {
 <html lang="zh-TW">
 <head>
 <meta charset="utf-8">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&family=Noto+Serif+TC:wght@700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -52,7 +49,7 @@ function buildOgHtml(cfg) {
     width: 1200px;
     height: 630px;
     overflow: hidden;
-    font-family: 'Noto Sans TC', sans-serif;
+    font-family: 'PingFang TC', 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
     background: #f5f5f7;
     color: #1a1a2e;
     position: relative;
@@ -111,7 +108,7 @@ function buildOgHtml(cfg) {
 
   /* ── Title ── */
   .title {
-    font-family: 'Noto Serif TC', serif;
+    font-family: 'Songti TC', 'Noto Serif TC', 'PMingLiU', serif;
     font-weight: 700;
     font-size: 78px;
     line-height: 1.3;
@@ -232,10 +229,10 @@ async function main() {
     const page = await browser.newPage();
     await page.setViewport({ width: 1200, height: 630, deviceScaleFactor: 1 });
 
-    await page.setContent(html, { waitUntil: 'networkidle0' });
+    await page.setContent(html, { waitUntil: 'load' });
 
-    // Wait for web fonts to be fully loaded
-    await page.waitForFunction(() => document.fonts.ready.then(() => document.fonts.size > 0), { timeout: 8000 }).catch(() => {
+    // Wait for fonts to settle before taking the screenshot.
+    await page.waitForFunction(() => document.fonts.ready.then(() => true), { timeout: 3000 }).catch(() => {
       console.warn('   ⚠️  Font loading timed out, using fallback fonts');
     });
     await new Promise((r) => setTimeout(r, 300));

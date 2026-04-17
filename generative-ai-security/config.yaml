@@ -1,0 +1,21 @@
+page:
+  title: "生成式 AI 資訊安全｜企業員工的風險辨識與安全實踐"
+  badge: "資訊安全實務 · 生成式 AI 使用守則"
+  hero_title: "生成式 AI 資訊安全<br>從常見失誤到安全實踐"
+  subtitle: "給一般企業員工的實務入門課。透過辦公室真實情境，理解哪些資料不能貼、哪些工具不能亂接，以及如何在提升效率的同時守住公司與客戶資訊。"
+
+quotes:
+  opening:
+    text: "生成式 AI 最危險的地方，<br>往往不是模型不夠聰明，<br>而是我們太快把它當成值得完全信任的同事。"
+  closing:
+    text: >
+      會用 AI，不代表能安全地用 AI。<br>
+      真正成熟的團隊，不是禁止工具，<br>
+      而是知道什麼能丟、什麼不能丟，出了問題要怎麼及時停損。<br><br>
+      當每位同仁都理解風險邊界，AI 才會從效率工具，變成組織可長可久的助力。
+
+seo:
+  title: "生成式 AI 資訊安全｜企業員工的風險辨識與安全實踐"
+  description: "用辦公室實際案例理解生成式 AI 的資料外洩、錯誤授權、假資訊與第三方工具風險，建立企業員工可立即落地的安全使用習慣。"
+  image: "https://ben-programmer.github.io/agent-skill-lecture-builder/generative-ai-security/assets/og-image.jpg"
+  url: "https://ben-programmer.github.io/agent-skill-lecture-builder/generative-ai-security/"
